@@ -1,0 +1,23 @@
+
+<% if @OS == "Windows" %>
+    <%= link_to "Download for Windows", base_wars_download_win_path, class: "download-btn btn btn-success",  target: "_blank", rel: "nofollow" %>
+<% elsif @OS == "Linux" %>
+    <%= link_to "Download for Linux", base_wars_download_lin_path, class: "download-btn btn btn-success",  target: "_blank", rel: "nofollow" %>
+<% else %>
+    <div class="download-btn btn btn-success">
+        Choose an OS below!
+    </div>
+<% end %>
+<br>
+<br>
+<p>
+    Direct Download:
+    <%= link_to "Windows", base_wars_download_win_path, target: "_blank", rel: "nofollow" %>
+    <!--|
+    <%= link_to "Mac", base_wars_download_mac_path, target: "_blank", rel: "nofollow" %>-->
+    |
+    <%= link_to "Linux", base_wars_download_lin_path, target: "_blank", rel: "nofollow" %>
+    |
+    <%= link_to "Raw Data", base_wars_download_raw_path, target: "_blank", rel: "nofollow" %>
+
+</p>

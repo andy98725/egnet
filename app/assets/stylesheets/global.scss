@@ -1,0 +1,116 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.main {
+  margin-top: 60px;
+  padding: 2%;
+  padding-top: 0;
+  width: 80%;
+  border-radius: 0 0 8px 8px;
+}
+h1{
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 3em;
+}
+h2{
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 2em;
+}
+h3{
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.5em;
+}
+h4{
+  text-align: center;
+  color: #fff;
+  font-size: 1.25em;
+}
+p{
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+
+hr{
+  margin: 60px 10px 60px 10px;
+
+}
+.navbar{
+  height: 60px;
+  .nav{
+    height: 60px;
+    vertical-align: middle;
+    .nav-item{
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+}
+.navbar-right{
+  padding-right: 30px;
+}
+header{
+  padding-right: 30px;
+}
+#logo{
+  padding-left: 30px;
+  max-width: 50%;
+  max-height: 60px;
+}
+#title{
+  text-align: center;
+  width: 75%;
+}
+
+.horizontal-wrapper{
+  text-align: justify;
+}
+.horizontal-block{
+  width: 48%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+}
+
+// Colors
+
+body{
+  background: #15151a;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 60px, rgba(21,21,26,1) 120px);
+  background-attachment: fixed;
+  color: #f0f0f0;
+  .container{
+    background: #212121;
+  }
+  a:link{
+    color: #aae;
+  }
+  a:visited, a:hover, a:active{
+    color: #aaa;
+  }
+
+  .navbar{
+    background: #000;
+    li a:hover{
+      background-color: #333 !important;
+    }
+  }
+  .download-btn{
+  color: #f0f0f0 !important;
+  text-shadow: 1px 1px #a0a0a0 !important;
+  }
+
+
+  // Fade out bottom
+  .patchAbridged:after {
+    pointer-events   : none;
+    background-image: linear-gradient(to bottom, transparent, #212121);
+  }
+
+}

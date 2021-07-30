@@ -1,0 +1,8 @@
+<header class="navbar navbar-fixed-top">
+  <!--<%= render "components/userBar" %>-->
+  <%= link_to image_tag("logo.png", alt: "Everlasting Games", id:"logo"), root_path %>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="nav-item"><%= link_to "Home", root_path, class: "nav-item"%></li>
+    <li class="nav-item"><%= link_to "Base Wars", base_wars_path, class: "nav-item" %></li>
+  </ul>
+</header>

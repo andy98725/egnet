@@ -1,0 +1,41 @@
+<% provide(:title, "Base Wars") %>
+
+<h1><%=  image_tag("base_wars_logo.png", alt: "Base Wars", id:"title") %></h1>
+
+<div class="horizontal-wrapper">
+    <div class="horizontal-block">
+        <iframe id="trailerVideo" frameborder="0" allowfullscreen src="//www.youtube.com/embed/CGBQd-mX2jE"></iframe>
+
+        <hr>
+
+        <%= render 'components/base_wars/patchNotesAbridged' %>
+
+    </div>
+    <div class="horizontal-block">
+        <h1>Download Launcher</h1>
+        <%= render 'components/base_wars/downloadBtn' %>
+
+        <hr>
+
+        <h1>Description</h1>
+        <br>
+        Base Wars is a PvP Turn Based Strategy game themed around RTS games.
+        <br>
+        Expand your economy, build an army, and crush your opponents in this simple yet expansive Strategy environment!
+        <br>
+        <br>
+        It currently has a Campaign mode, vs AI, local Multiplayer, and online Multiplayer.
+        <br>
+        The Campaign and Matchmaking features are still under development; Expect many updates to come!
+
+
+        <hr>
+
+
+        <p>
+            Like the game? Wanna talk to someone about it?
+            <br>
+            Join our <%= link_to "Discord!", "https://discord.gg/WuY6ZJR" %>
+        </p>
+    </div>
+</div>
