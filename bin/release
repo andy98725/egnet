@@ -1,0 +1,2 @@
+echo "Migrating database..."
+bin/rake db:migrate

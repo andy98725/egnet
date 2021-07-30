@@ -1,0 +1,28 @@
+.git*
+.gitignore
+Dockerfile
+README.md
+
+## Below should be identical to the .gitignore
+# Environment config
+.env
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+/node_modules
+/yarn-error.log
+
+/public/assets
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
