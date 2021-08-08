@@ -1,2 +1,5 @@
 echo "Migrating database..."
 bin/rake db:migrate
+
+echo "Compiling assets..."
+bin/webpack
