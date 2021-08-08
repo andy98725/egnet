@@ -1,5 +1,2 @@
 echo "Migrating database..."
 bin/rake db:migrate
-
-echo "Compiling webpack..."
-RAILS_ENV=production rails webpacker:compile
