@@ -14,17 +14,20 @@ RUN apt-get update -qq && apt-get install --fix-missing -y \
   apt-get update && apt-get install -y nodejs yarn
 
 
-COPY Gemfile /egnet/Gemfile
-COPY Gemfile.lock /egnet/Gemfile.lock
-ENV PATH="/egnet/bin:${PATH}"
-WORKDIR /egnet
+ENV APP_HOME /egnet
+WORKDIR ${APP_HOME}
 
+COPY Gemfile ${APP_HOME}/
+COPY Gemfile.lock ${APP_HOME}/
 RUN gem install bundler && bundle install
 
-  
-RUN mkdir tmp && mkdir tmp/pids
-ADD . /egnet
-RUN chmod +x /egnet/bin/*
+
+ADD . ${APP_HOME}
+RUN mkdir tmp/pids -p
+RUN yarn install --check-files
+
+ENV PATH="${APP_HOME}/bin:${PATH}"
+RUN chmod +x ${APP_HOME}/bin/*
 
 EXPOSE 3000
 CMD ["bundle", "exec", "puma", "-c", "config/puma.rb"]
