@@ -2,4 +2,4 @@ echo "Migrating database..."
 bin/rake db:migrate
 
 echo "Compiling assets..."
-RAILS_ENV=production bundle exec rake assets:precompile
+webpack
