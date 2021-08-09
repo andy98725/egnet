@@ -1,6 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.serve_static_files = true
+  # config.serve_static_files = true
+  # Assets are not precompiled.
+  config.assets.compile = false
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -27,8 +29,8 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   
-   # Production depends on precompilation of packs prior to booting for performance.
-  config.assets.compile = true
+  #  # Production depends on precompilation of packs prior to booting for performance.
+  # config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
