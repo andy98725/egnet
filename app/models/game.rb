@@ -1,24 +1,33 @@
 class Game
+  
+  def self.add_player
+    REDIS.INCRBY("online", 1)
+  end
+  def self.remove_player
+    REDIS.INCRBY("online", -1)
+  end
+  def self.broadcast_info(id)
+    ActionCable.server.broadcast "info_#{id}",
+        {action: "server_info", "players": REDIS.GET("online"),
+        "unranked_player": Unranked.has_player}
+  end
+
   def self.start(id1, id2)
     p1, p2 = [id1, id2].shuffle
 
-    ActionCable.server.broadcast "player_#{p1}", {action: "game_start", msg: "host"}
-    ActionCable.server.broadcast "player_#{p2}", {action: "game_start", msg: "client"}
+    REDIS.SET("opponent_for:#{p1}", p2)
+    REDIS.SET("opponent_for:#{p2}", p1)
 
-    REDIS.set("opponent_for:#{p1}", p2)
-    REDIS.set("opponent_for:#{p2}", p1)
-
+    ActionCable.server.broadcast "player_#{p2}", {action: "server_start", "info": "client"}
+    ActionCable.server.broadcast "player_#{p1}", {action: "server_start", "info": "host"}
   end
 
-  def self.opponent_for(uuid)
-    return REDIS.get("opponent_for:#{uuid}")
-  end
 
-  def self.send_info(uuid, info)
-    opponent = opponent_for(uuid)
+  def self.send_action(uuid, info)
+    opponent = REDIS.get("opponent_for:#{uuid}")
 
     # "player_#{opponent}"
-    ActionCable.server.broadcast "player_#{uuid}", {"action": "get_info", "info": info["data"]}
+    ActionCable.server.broadcast "player_#{uuid}", {"action": "client_action", "info": info["data"]}
   end
 
 end

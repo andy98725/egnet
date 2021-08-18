@@ -12,6 +12,10 @@ class Unranked
     REDIS.srem("q", uuid)
   end
 
+  def self.has_player
+    REDIS.smembers("q").size > 0
+  end
+
   def self.clear_all
     REDIS.del("q")
   end
