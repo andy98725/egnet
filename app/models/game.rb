@@ -27,7 +27,7 @@ class Game
     opponent = REDIS.get("opponent_for:#{uuid}")
 
     # "player_#{opponent}"
-    ActionCable.server.broadcast "player_#{uuid}", {"action": "client_action", "info": info["data"]}
+    ActionCable.server.broadcast "player_#{opponent}", {"action": "client_action", "info": info["data"]}
   end
 
 end
