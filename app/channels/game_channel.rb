@@ -2,10 +2,7 @@ class GameChannel < ApplicationCable::Channel
   def subscribed
     stream_from "player_#{uuid}"
   end
-  def get_info
 
-  end
-  
   def queue_unranked
     Unranked.add(uuid)
   end
@@ -14,8 +11,13 @@ class GameChannel < ApplicationCable::Channel
       Game.send_action(uuid, data)
   end
 
-  def unsubscribed
+  def quit_game
     Unranked.remove(uuid)
-    # TODO disconnect during game edge cases
+    Game.quit_game(uuid)
+  end
+
+
+  def unsubscribed
+    quit_game
   end
 end

@@ -6,10 +6,12 @@ class Unranked
     else
       REDIS.sadd("q", uuid)
     end
+    Game.broadcast_info
   end
 
   def self.remove(uuid)
     REDIS.srem("q", uuid)
+    Game.broadcast_info
   end
 
   def self.has_player
@@ -18,5 +20,6 @@ class Unranked
 
   def self.clear_all
     REDIS.del("q")
+    Game.broadcast_info
   end
 end
