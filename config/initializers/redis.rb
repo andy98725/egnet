@@ -6,4 +6,4 @@ REDIS = Redis.new(
   db:   ENV['REDIS_DB'])
 
   
-  # REDIS.SET("online", 0)
+REDIS.SET("online", 0)
