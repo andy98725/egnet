@@ -7,6 +7,12 @@ class GameChannel < ApplicationCable::Channel
     Unranked.add(uuid)
   end
 
+  def queue_room(data)
+    #TODO process data for room code
+    code = 'abcd'
+    Unranked.add_room(uuid, code)
+  end
+
   def send_action(data)
       Game.send_action(uuid, data)
   end
