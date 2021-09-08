@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'main_pages#home'
   get '/about',                             to: 'main_pages#about'
   get '/contact',                           to: 'main_pages#contact'
+  get '/discord',                           to: 'main_pages#discord'
   get '/base-wars',                         to: 'main_pages#index'
   get '/base-wars/patchNotes',              to: 'main_pages#patchNotes'
   get '/base-wars/patchNotes/raw',          to: 'main_pages#patchRaw'
