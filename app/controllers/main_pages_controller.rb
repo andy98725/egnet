@@ -5,6 +5,9 @@ class MainPagesController < ApplicationController
   def index
     @OS = helpers.get_operating_system
   end
+  def discord
+    redirect_to 'https://discord.gg/HzDVS69'
+  end
   def patchNotes
   end
   def patchRaw
