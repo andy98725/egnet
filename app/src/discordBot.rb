@@ -4,7 +4,7 @@ require 'discordrb'
 ID_server = 494724898439036938
 ID_admin_user = 143468067031089152
 ID_online_channel = 887447044036362290
-ID_role_message = 887778318668144640
+ID_role_message = 887809411303735376
 ID_active_role = 800083761906974730
 ID_online_role = 887448939010326528
 ID_red_role = 887776922149486612
@@ -22,19 +22,36 @@ class DiscordBot
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
 
-    @bot.reaction_add do |event|
-      return if event.message.id != ID_role_message
-      puts event.emoji.name
-    end
-    if @branch == 'stable'  
-      @bot.message(content: "!notify", in: ID_online_channel) do |event|
-        self.toggle_role event, ID_online_role, "Online"
+    if @branch == 'stable'
+
+      @bot.reaction_add do |event|
+        break unless event.message.id == ID_role_message
+        case event.emoji.to_reaction
+        when "fight:887765729607299082"
+          event.user.add_role(ID_active_role)
+        when "online:887765766714306630"
+          event.user.add_role(ID_online_role)
+        when "🟥"
+          Rails.logger.info "Blue #{event.user.role?(ID_blue_role)}"
+          event.user.add_role(ID_red_role) #unless event.user.role?(ID_blue_role)
+        when "🟦"
+          event.user.add_role(ID_blue_role) #unless event.user.role?(ID_red_role)
+        else
+          event.message.delete_reaction(event.user, event.emoji.to_reaction)
+        end
       end
-      @bot.message(content: "!active") do |event|
-        self.toggle_role event, ID_active_role, "Active"
-      end
-      @bot.message(content: "!help") do |event|
-        event.respond Help_message
+      @bot.reaction_remove do |event|
+        break unless event.message.id == ID_role_message
+        case event.emoji.to_reaction
+        when "fight:887765729607299082"
+          event.user.remove_role(ID_active_role)
+        when "online:887765766714306630"
+          event.user.remove_role(ID_online_role)
+        when "🟥"
+          event.user.remove_role(ID_red_role)
+        when "🟦"
+          event.user.remove_role(ID_blue_role)
+        end
       end
 
       @bot.message(content: "!copy", from: ID_admin_user) do |event|
@@ -55,16 +72,6 @@ class DiscordBot
         end
       end
 
-    end
-  end
-
-  def self.toggle_role event, role_id, role_name
-    if event.user.role?(role_id)
-      event.user.remove_role(role_id)
-      event.respond "Removed #{role_name} role from #{event.user.name}"
-    else
-      event.user.add_role(role_id)
-      event.respond "Gave #{role_name} role to #{event.user.name}"
     end
   end
 
