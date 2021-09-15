@@ -1,10 +1,10 @@
 class InfoChannel < ApplicationCable::Channel
   def subscribed
     stream_from "info"
-    Game.add_player
+    Players.add_player
   end
 
   def unsubscribed
-    Game.remove_player
+    Players.remove_player
   end
 end

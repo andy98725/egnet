@@ -8,6 +8,7 @@ class MainPagesController < ApplicationController
   def discord
     redirect_to 'https://discord.gg/HzDVS69'
   end
+
   def patchNotes
   end
   def patchRaw
@@ -26,10 +27,10 @@ class MainPagesController < ApplicationController
     helpers.reportDownload(3)
     redirect_to helpers.getS3File('launcher/lin/Base Wars.zip')
   end
-
   def installerNum
     render plain: "0.1"
   end
+
   def download
     helpers.reportDownload(0)
     if params['branch'] == 'beta'
@@ -37,7 +38,6 @@ class MainPagesController < ApplicationController
     else
       redirect_to helpers.getS3File('stable/Base_Wars.zip')
     end
-
   end
   def versionNum
     if params['branch'] == 'beta'

@@ -1,19 +1,4 @@
 class Game
-  
-  def self.add_player
-    REDIS.INCRBY("online", 1)
-    self.broadcast_info
-  end
-  def self.remove_player
-    REDIS.INCRBY("online", -1)
-    self.broadcast_info
-  end
-
-  def self.broadcast_info
-    ActionCable.server.broadcast "info",
-        {action: "server_info", "players": REDIS.GET("online"),
-        "unranked_player": Unranked.has_player}
-  end
 
   def self.start(id1, id2)
     p1, p2 = [id1, id2].shuffle
@@ -23,6 +8,12 @@ class Game
 
     ActionCable.server.broadcast "player_#{p2}", {"action": "server_start", "info": "client"}
     ActionCable.server.broadcast "player_#{p1}", {"action": "server_start", "info": "host"}
+
+    n1 = REDIS.GET("name_#{p1}")
+    n2 = REDIS.GET("name_#{p2}")
+
+    DiscordBot.broadcast_game n1, n2
+
   end
 
   def self.quit_game(uuid)

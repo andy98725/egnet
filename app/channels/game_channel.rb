@@ -3,14 +3,13 @@ class GameChannel < ApplicationCable::Channel
     stream_from "player_#{uuid}"
   end
 
-  def queue_unranked
-    Unranked.add(uuid)
+  def queue_unranked(data)
+    Unranked.add(uuid, JSON.parse(data['data'])['name'])
   end
 
   def queue_room(data)
-    #TODO process data for room code
-    code = 'abcd'
-    Unranked.add_room(uuid, code)
+    #TODO add client
+    Unranked.add_room(uuid, JSON.parse(data['data'])['code'],JSON.parse(data['data'])['name'])
   end
 
   def send_action(data)

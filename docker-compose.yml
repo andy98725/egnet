@@ -3,7 +3,7 @@ services:
 
   web:
     build: .
-    command: bundle exec puma -C config/puma.rb
+    command: bin/server
     volumes:
       - .:/egnet
     ports:

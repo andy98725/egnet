@@ -1,15 +1,18 @@
 class Unranked
 
-  def self.add(uuid)
+  def self.add(uuid, name)
+    REDIS.set("name_#{uuid}", name)
     if opponent = REDIS.spop("q")
       Game.start(uuid, opponent)
     else
       REDIS.sadd("q", uuid)
+      DiscordBot.broadcast_looking name
     end
-    Game.broadcast_info
+    Players.broadcast_info
   end
 
-  def self.add_room(uuid, code)
+  def self.add_room(uuid, code, name)
+    REDIS.set("name_#{uuid}", name)
     if opponent = REDIS.getdel("room_#{code}") and code == REDIS.getdel("pcode_#{opponent}")
       Game.start(uuid, opponent)
     else
@@ -19,11 +22,14 @@ class Unranked
   end
 
   def self.remove(uuid)
-    REDIS.srem("q", uuid)
+    REDIS.del("name_#{uuid}")
+    if REDIS.srem("q", uuid)
+      DiscordBot.clear_searching
+    end
     if code = REDIS.getdel("pcode_#{uuid}")
       REDIS.del("room_#{code}")
     end
-    Game.broadcast_info
+    Players.broadcast_info
   end
 
   def self.has_player
@@ -32,7 +38,6 @@ class Unranked
 
   def self.clear_all
     REDIS.del("q")
-      
-    Game.broadcast_info
+    Players.broadcast_info
   end
 end

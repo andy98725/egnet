@@ -5,7 +5,8 @@ RUN apt-get update -qq && apt-get install --fix-missing -y \
   build-essential\
   curl \
   build-essential \
-  libpq-dev
+  libpq-dev \
+  libsodium-dev
 
 # Install nodejs and yarn
   RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
@@ -30,4 +31,4 @@ ENV PATH="${APP_HOME}/bin:${PATH}"
 RUN chmod +x ${APP_HOME}/bin/*
 
 EXPOSE 3000
-CMD ["bundle", "exec", "puma", "-c", "config/puma.rb"]
+CMD ["bin/server"]
