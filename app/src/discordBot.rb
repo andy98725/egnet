@@ -4,8 +4,11 @@ require 'discordrb'
 ID_server = 494724898439036938
 ID_admin_user = 143468067031089152
 ID_online_channel = 887447044036362290
-ID_online_role = 887448939010326528
+ID_role_message = 887778318668144640
 ID_active_role = 800083761906974730
+ID_online_role = 887448939010326528
+ID_red_role = 887776922149486612
+ID_blue_role = 887776975060619274
 
 
 class DiscordBot
@@ -19,7 +22,11 @@ class DiscordBot
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
 
-    if @branch == 'stable'
+    @bot.reaction_add do |event|
+      return if event.message.id != ID_role_message
+      puts event.emoji.name
+    end
+    if @branch == 'stable'  
       @bot.message(content: "!notify", in: ID_online_channel) do |event|
         self.toggle_role event, ID_online_role, "Online"
       end
@@ -90,15 +97,3 @@ Funnies = [["Ping!", "Pong!"],
           ["Who da bes?", "You da bes :D"],
           ["War Bot sucks!", ":("],
           ["9+10", "21"]]
-Help_message =
-"**Commands**:
-```
-!active
-```
-This gives you the Active role, which anybody can ping for questions or finding a game.
-If you no longer want this role, simply use the command again.
-```
-!notify
-```
-When done in #online-games, this gives you the Online role.
-This role gets pinged any time someone is looking for a game in matchmaking."

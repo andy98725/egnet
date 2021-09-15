@@ -1,9 +1,4 @@
 #!/bin/bash
 
-# if [ "$RAILS_ENV" != "production" ]
-# then
-#   exit 0
-# fi
-
 echo "Starting Discord Bot..."
 rake bot
