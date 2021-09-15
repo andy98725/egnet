@@ -6,7 +6,7 @@ class MainPagesController < ApplicationController
     @OS = helpers.get_operating_system
   end
   def discord
-    redirect_to 'https://discord.gg/HzDVS69'
+    redirect_to 'https://discord.gg/WuY6ZJR'
   end
 
   def patchNotes
