@@ -13,25 +13,17 @@ ID_blue_role = 887776975060619274
 
 class DiscordBot
   def self.run
-    self.join
-    @bot.run
-  end
-  def self.join
-    return if @bot
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
-    Rails.logger.info "ENV VARS #{ENV.keys}!!! !!! !!!"
-    Rails.logger.info "BRANCH #{ENV['BASE_WARS_BRANCH']}"
+    @branch = 'stable'
     Rails.logger.info "VAR #{@branch}"
 
     @bot.ready do |event|
       @OnlineRole = @bot.servers[ID_server].role(ID_online_role)
-
       Rails.logger.info "Discord Bot Online."
     end
 
     if @branch == 'stable'
-
       @bot.reaction_add do |event|
         break unless event.message.id == ID_role_message
         case event.emoji.to_reaction
@@ -79,14 +71,13 @@ class DiscordBot
           event.respond response
         end
       end
-
     end
+    @bot.run(true)
   end
 
   def self.broadcast_looking name
     Rails.logger.info "On branch #{@branch}"
-    return if !@branch
-    self.join
+    return if @branch.empty?
     self.clear_searching
 
     append = @branch == 'stable'? "! #{@OnlineRole.mention}" : ' on the BETA server!'
@@ -94,7 +85,6 @@ class DiscordBot
   end
   def self.broadcast_game name, name2
     return if !@branch
-    self.join
     self.clear_searching
     @bot.send_message(ID_online_channel, "Game started: #{name} VS #{name2}")
   end

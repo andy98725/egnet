@@ -1,3 +1,2 @@
 echo "Starting Discord Bot..."
 bundle exec rake bot
-
