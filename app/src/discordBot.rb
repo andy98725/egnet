@@ -74,7 +74,7 @@ class DiscordBot
   end
 
   def self.broadcast_looking name
-    RAils.logger.info "FULLENV #{ENV.keys}"
+    Rails.logger.info "FULLENV #{ENV.keys}"
     Rails.logger.info "On branch #{@branch} with env #{ENV['BASE_WARS_BRANCH']}"
     return if @branch.empty?
     self.clear_searching
