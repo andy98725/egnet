@@ -6,6 +6,7 @@ class Unranked
       Game.start(uuid, opponent)
     else
       REDIS.sadd("q", uuid)
+      Rails.logger.info("CHECKPOINT AAA #{name}")
       DiscordBot.broadcast_looking name
     end
     Players.broadcast_info

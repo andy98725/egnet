@@ -15,7 +15,6 @@ class DiscordBot
   def self.run
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
-    Rails.logger.info "VAR #{@branch}"
 
     @bot.ready do |event|
       @OnlineRole = @bot.servers[ID_server].role(ID_online_role)
@@ -23,7 +22,6 @@ class DiscordBot
     end
 
     if @branch == 'stable'
-      Rails.logger.info "AAAAAAAA"
       @bot.reaction_add do |event|
         break unless event.message.id == ID_role_message
         case event.emoji.to_reaction
