@@ -13,15 +13,19 @@ ID_blue_role = 887776975060619274
 
 class DiscordBot
   def self.run
+    @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
     self.join
-    puts "Discord Bot Online."
-    Rails.logger.info "Discord Bot Online."
     @bot.run
   end
   def self.join
     return if @bot
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
-    @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
+
+    @bot.ready do |event|
+      @OnlineRole = @bot.servers[ID_server].role(ID_online_role)
+
+      Rails.logger.info "Discord Bot Online."
+    end
 
     if @branch == 'stable'
 
@@ -81,8 +85,9 @@ class DiscordBot
     # return if !@branch
     self.join
     self.clear_searching
-    append = @branch == 'stable'? '! @Online' : ' on the BETA server!'
-    @searching = @bot.send_message(ID_online_channel, "#{name} is looking for a game#{append}")
+
+    append = @branch == 'stable'? "! #{@OnlineRole.mention}" : ' on the BETA server!'
+    # @searching = @bot.send_message(ID_online_channel, "#{name} is looking for a game#{append}")
   end
   def self.broadcast_game name, name2
     return if !@branch
