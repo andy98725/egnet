@@ -16,4 +16,4 @@ release:
 
 run:
   web: bin/server
-  discord: bin/discord
+  web: bin/discord
