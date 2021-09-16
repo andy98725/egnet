@@ -15,6 +15,7 @@ class DiscordBot
   def self.run
     self.join
     puts "Discord Bot Online."
+    Rails.logger.info "Discord Bot Online."
     @bot.run
   end
   def self.join
@@ -76,7 +77,8 @@ class DiscordBot
   end
 
   def self.broadcast_looking name
-    return if !@branch
+    Rails.logger.info "On branch #{@branch}"
+    # return if !@branch
     self.join
     self.clear_searching
     append = @branch == 'stable'? '! @Online' : ' on the BETA server!'
