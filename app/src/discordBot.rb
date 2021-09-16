@@ -13,7 +13,7 @@ ID_blue_role = 887776975060619274
 
 class DiscordBot
   def self.run
-    Rails.logger.info "ENV VARS #{ENV}!!! !!! !!!"
+    Rails.logger.info "ENV VARS #{ENV.keys}!!! !!! !!!"
     self.join
     @bot.run
   end

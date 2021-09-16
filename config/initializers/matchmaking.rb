@@ -1,3 +1,3 @@
 
-# # Disable actionCable logging
-# ActionCable.server.config.logger = Logger.new(nil)
+# Disable actionCable logging
+ActionCable.server.config.logger = Logger.new(nil)
