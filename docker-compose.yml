@@ -3,7 +3,7 @@ services:
 
   web:
     build: .
-    command: bash -c "bin/discord & bin/server"
+    command: bin/server
     volumes:
       - .:/egnet
     ports:
