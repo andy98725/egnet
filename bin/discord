@@ -1,4 +1,3 @@
-#!/bin/bash
-
 echo "Starting Discord Bot..."
-rake bot
+bundle exec rake bot
+

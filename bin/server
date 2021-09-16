@@ -1,6 +1,3 @@
-#!/bin/bash
-
-discordBot & 
 echo "Starting Server..."
 bundle exec puma -C config/puma.rb
 
