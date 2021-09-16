@@ -8,6 +8,13 @@ Bundler.require(*Rails.groups)
 
 module Egnet
   class Application < Rails::Application
+    # Start up discord bot once server is running
+    config.after_initialize do
+      if ENV['BASE_WARS_BRANCH']
+        DiscordBot.run
+      end
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
