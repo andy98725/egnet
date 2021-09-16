@@ -83,12 +83,12 @@ class DiscordBot
 
   def self.broadcast_looking name
     Rails.logger.info "On branch #{@branch}"
-    # return if !@branch
+    return if !@branch
     self.join
     self.clear_searching
 
     append = @branch == 'stable'? "! #{@OnlineRole.mention}" : ' on the BETA server!'
-    # @searching = @bot.send_message(ID_online_channel, "#{name} is looking for a game#{append}")
+    @searching = @bot.send_message(ID_online_channel, "#{name} is looking for a game#{append}")
   end
   def self.broadcast_game name, name2
     return if !@branch
