@@ -15,7 +15,6 @@ class DiscordBot
   def self.run
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
-    @branch = 'stable'
     Rails.logger.info "VAR #{@branch}"
 
     @bot.ready do |event|
@@ -24,6 +23,7 @@ class DiscordBot
     end
 
     if @branch == 'stable'
+      Rails.logger.info "AAAAAAAA"
       @bot.reaction_add do |event|
         break unless event.message.id == ID_role_message
         case event.emoji.to_reaction
@@ -76,15 +76,16 @@ class DiscordBot
   end
 
   def self.broadcast_looking name
-    Rails.logger.info "On branch #{@branch}"
+    RAils.logger.info "FULLENV #{ENV.keys}"
+    Rails.logger.info "On branch #{@branch} with env #{ENV['BASE_WARS_BRANCH']}"
     return if @branch.empty?
     self.clear_searching
 
-    append = @branch == 'stable'? "! #{@OnlineRole.mention}" : ' on the BETA server!'
+    append = (@branch == 'stable')? "! #{@OnlineRole.mention}" : ' on the BETA server!'
     @searching = @bot.send_message(ID_online_channel, "#{name} is looking for a game#{append}")
   end
   def self.broadcast_game name, name2
-    return if !@branch
+    return if @branch.empty?
     self.clear_searching
     @bot.send_message(ID_online_channel, "Game started: #{name} VS #{name2}")
   end
