@@ -13,9 +13,6 @@ ID_blue_role = 887776975060619274
 
 class DiscordBot
   def self.run
-    Rails.logger.info '\n AAAAAAA\n\n'
-    Rails.logger.info "ENV VARS #{ENV.keys}!!! !!! !!!"
-    Rails.logger.info "BRANCH #{ENV['BASE_WARS_BRANCH']}"
     self.join
     @bot.run
   end
@@ -23,9 +20,9 @@ class DiscordBot
     return if @bot
     @bot = Discordrb::Bot.new token: ENV['DISCORD_BOT_TOKEN']
     @branch = ENV['BASE_WARS_BRANCH'] # 'beta' or 'stable'
-    Rails.logger.info '\n BBBBBBB\n\n'
     Rails.logger.info "ENV VARS #{ENV.keys}!!! !!! !!!"
     Rails.logger.info "BRANCH #{ENV['BASE_WARS_BRANCH']}"
+    Rails.logger.info "VAR #{@branch}"
 
     @bot.ready do |event|
       @OnlineRole = @bot.servers[ID_server].role(ID_online_role)
