@@ -3,7 +3,6 @@ services:
 
   web:
     build: .
-    command: bin/server
     volumes:
       - .:/egnet
     ports:
