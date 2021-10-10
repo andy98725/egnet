@@ -1,12 +1,12 @@
 class MainPagesController < ApplicationController
-  def home
-    redirect_to base_wars_url
-  end
   def index
     @OS = helpers.get_operating_system
   end
   def discord
     redirect_to 'https://discord.gg/WuY6ZJR'
+  end
+  def steam
+    redirect_to 'https://store.steampowered.com/app/1747110/Base_Wars/'
   end
 
   def patchNotes
