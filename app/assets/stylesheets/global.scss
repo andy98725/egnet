@@ -13,6 +13,7 @@ h1{
   font-weight: bold;
   color: #fff;
   font-size: 3em;
+  text-transform: uppercase;
 }
 h2{
   text-align: center;
@@ -46,6 +47,7 @@ hr{
   .nav{
     height: 60px;
     vertical-align: middle;
+    text-align: center;
     .nav-item{
       height: 100%;
       vertical-align: middle;
