@@ -8,15 +8,6 @@
 
         <hr>
 
-        <%= render 'components/base_wars/patchNotesAbridged' %>
-
-    </div>
-    <div class="horizontal-block">
-
-        <h1>Steam</h1>
-        <h2>
-            Get the game on Steam <a href='https://store.steampowered.com/app/1747110/Base_Wars/'>here!</a>
-        </h2>
         <h1>Description</h1>
         <br>
         Base Wars is a bite-sized PvP Turn Based Strategy game originally inspired by RTS games.
@@ -24,18 +15,27 @@
         Expand your economy, build an army, and crush your opponents in this simple yet expansive Strategy environment!
         <br>
         <br>
-        It currently has a Campaign mode, vs AI, local Multiplayer, and online matchmaking.
+        It currently has a limited Campaign mode, vs AI, local Multiplayer, and online matchmaking.
         <br>
         The Campaign and Ranked Matchmaking features are still under development; Expect many updates to come!
-
-
         <hr>
 
+    </div>
+    <div class="horizontal-block">
 
-        <p>
-            Like the game? Wanna talk to someone about it?
+        <h1>Demo Version</h1>
+        <%= render 'components/base_wars/downloadBtn' %>
+        <hr>
+
+        <h1>Steam</h1>
+        <h2>Get the game on <%= link_to "Steam!", steam_path %></h2>
+        <hr>
+
+        <h1>Discord</h1>
+        <h2>
+            Like the game? Wanna talk about it?
             <br>
-            Join our <%= link_to "Discord!", "https://discord.gg/WuY6ZJR" %>
-        </p>
+            Join our <%= link_to "Discord!", discord_path %>
+        </h2>
     </div>
 </div>

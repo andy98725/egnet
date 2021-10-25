@@ -15,32 +15,32 @@ class MainPagesController < ApplicationController
     render :inline => "<%= render 'components/base_wars/patchNotes' %>"
   end
 
-  def installerWindows
+  def demoWindows
     helpers.reportDownload(1)
-    redirect_to helpers.getS3File('launcher/win/Base Wars.zip')
+    redirect_to helpers.getS3File('demo/win/Base Wars.zip')
   end
-  def installerMac
+  def demoMac
     helpers.reportDownload(2)
-    redirect_to helpers.getS3File('launcher/mac/Base Wars.zip')
+    redirect_to helpers.getS3File('demo/mac/Base Wars.zip')
   end
-  def installerLinux
+  def demoLinux
     helpers.reportDownload(3)
-    redirect_to helpers.getS3File('launcher/lin/Base Wars.zip')
+    redirect_to helpers.getS3File('demo/lin/Base Wars.zip')
   end
   def installerNum
     render plain: "0.1"
   end
 
-  def download
+  def downloadRaw
     helpers.reportDownload(0)
-    if params['branch'] == 'beta'
+    if params['branch'] == 'beta' || ENV['BASE_WARS_BRANCH'] == 'beta'
       redirect_to helpers.getS3File('beta/Base_Wars.zip')
     else
       redirect_to helpers.getS3File('stable/Base_Wars.zip')
     end
   end
   def versionNum
-    if params['branch'] == 'beta'
+    if params['branch'] == 'beta' || ENV['BASE_WARS_BRANCH'] == 'beta'
       redirect_to helpers.getS3File('beta/version.txt')
     else
       redirect_to helpers.getS3File('stable/version.txt')
