@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   get '/base-wars/download/mac',            to: 'main_pages#demoMac'
   get '/base-wars/download/lin',            to: 'main_pages#demoLinux'
   get '/base-wars/download/version',        to: 'main_pages#installerNum'
-  get '/base-wars/download/raw',            to: 'main_pages#download'
+  get '/base-wars/download/raw',            to: 'main_pages#downloadRaw'
   get '/base-wars/download/raw/version',    to: 'main_pages#versionNum'
 end
