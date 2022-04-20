@@ -1,24 +1,10 @@
-# README
+# About
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The source for `everlastinggames.net`. A Rails server.
 
-Things you may want to cover:
+# Features
 
-* Ruby version
+Containerized through Docker-compose.
 
-* System dependencies
+A public Matchmaking API which accepts WebSocket connections, pairs them, then acts as a relay.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
